@@ -14,7 +14,9 @@
   "author": "Svitlana Vakulenko",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.4.7",
     "botbuilder": "^3.5.4",
+    "lodash": "^4.17.4",
     "restify": "^4.3.0"
   }
 }
