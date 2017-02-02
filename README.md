@@ -3,7 +3,7 @@ Data Pioneers Create Camp project
 
 ## Requirements
 
-* node
+* node.js
 
 
 ## Acknowledgment
