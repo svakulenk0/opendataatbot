@@ -1,0 +1,20 @@
+{
+  "name": "opendataatbot",
+  "version": "1.0.0",
+  "description": "user-friendly question-answering user-interface to search austrian open data portals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "open",
+    "data",
+    "austria"
+  ],
+  "author": "Svitlana Vakulenko",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.5.4",
+    "restify": "^4.3.0"
+  }
+}
