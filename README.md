@@ -8,4 +8,6 @@ Data Pioneers Create Camp project
 
 ## Acknowledgment
 
-[Microsoft Bot framework](https://dev.botframework.com)
+* [Microsoft Bot framework](https://docs.botframework.com/en-us/node/builder/overview/#navtitle)
+
+* [RealEstateBot Demo](https://github.com/Microsoft/BotBuilder-Samples/tree/master/Node/demo-Search/RealEstateBot)
