@@ -92,10 +92,10 @@ function create(settings) {
                 var results = args.searchResponse.facets.bindings;
                 console.log('Search.Output:', results.length);
                 var number_results = results.length.toString();
-                builder.Prompts.text(session, "Hi " + number_results);
+                // builder.Prompts.text(session, "Hi " + number_results);
                 var reply = new builder.Message(session)
                     // .text('Here are a few good options I found' + number_results);
-                    .text('There are ' + number_results + ' in the austrian open data portals that may be of interest to you.');
+                    .text('There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.');
                     
                     // .attachmentLayout(builder.AttachmentLayout.carousel)
                     // .attachments(results.map(searchHitAsCard.bind(null, true)));
