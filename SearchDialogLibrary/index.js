@@ -84,15 +84,16 @@ function create(settings) {
         new builder.IntentDialog()
             .onBegin((session, args) => {
                 // Save previous state
-                session.dialogData.selection = args.selection;
+                // session.dialogData.selection = args.selection;
                 session.dialogData.searchResponse = args.searchResponse;
-                session.dialogData.query = args.query;
+                // session.dialogData.query = args.query;
 
                 // Display results
                 var results = args.searchResponse.facets.bindings;
                 console.log('Search.Output:', results.length);
                 var number_results = results.length.toString();
-                // builder.Prompts.text(session, "Hi " + number_results);
+                // var reply_text = 'There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.'
+                // builder.Prompts.text(session, reply_text);
                 var reply = new builder.Message(session)
                     // .text('Here are a few good options I found' + number_results);
                     .text('There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.');
@@ -102,54 +103,11 @@ function create(settings) {
 
                 session.send(reply);
 
-                session.send(settings.multipleSelection ?
-                    'You can select one or more to add to your list, *list* what you\'ve selected so far, *refine* these results, see *more* or search *again*.' :
-                    'You can select one, *refine* these results, see *more* or search *again*.');
-
-            })
-            .matches(/again|reset/i, (session) => {
                 // Restart
                 session.replaceDialog('/');
-            })
-            .matches(/more/i, (session) => {
-                // Next Page
-                session.dialogData.query.pageNumber++;
-                performSearch(session, session.dialogData.query, session.dialogData.selection);
-            })
-            .matches(/refine/i, (session) => {
-                // Refine
-                session.beginDialog('refine', {
-                    query: session.dialogData.query,
-                    selection: session.dialogData.selection
-                });
-            })
-            .matches(/list/i, (session) => listAddedItems(session))
-            .matches(/done/i, (session) => session.endDialogWithResult({ selection: session.dialogData.selection, done: true }))
-            .onDefault((session, args) => {
-                var selectedKey = session.message.text;
-                var hit = _.find(session.dialogData.searchResponse.results, ['key', selectedKey]);
-                if (!hit) {
-                    // Un-recognized selection
-                    return session.send('Not sure what you mean. You can search *again*, *refine*, *list* or select one of the items above. Or are you *done*?');
-                } else {
-                    // Add selection
-                    var selection = session.dialogData.selection || [];
-                    if (!_.find(selection, ['key', hit.key])) {
-                        selection.push(hit);
-                        session.dialogData.selection = selection;
-                        session.save();
-                    }
 
-                    var query = session.dialogData.query;
-                    if (settings.multipleSelection) {
-                        // Multi-select -> Continue?
-                        session.send('%s was added to your list!', hit.title);
-                        session.beginDialog('confirm-continue', { selection: selection, query: query });
-                    } else {
-                        // Single-select -> done!
-                        session.endDialogWithResult({ selection: selection, query: query });
-                    }
-                }
+                // session.send('Do you want to search *again* or *done*?');
+
             }));
 
     // Handle refine search
