@@ -5,9 +5,7 @@ Kickstarted at the Data Pioneers Create Camp @ZAMG Vienna 2 February 2017.
 
 ## Requirements
 
-* restify
-* bluebird
-* lodash
+* Node
 
 ## Acknowledgment
 
@@ -15,4 +13,6 @@ Kickstarted at the Data Pioneers Create Camp @ZAMG Vienna 2 February 2017.
 
 * [Microsoft Bot framework](https://docs.botframework.com/en-us/node/builder/overview/#navtitle)
 
-* [RealEstateBot](https://github.com/Microsoft/BotBuilder-Samples/tree/master/Node/demo-Search/RealEstateBot)
+* [BotBuilder Samples](https://github.com/Microsoft/BotBuilder-Samples/tree/master/Node/demo-Search)
+
+* [How to deploy a Facebook bot](https://medium.com/@igougi.ui/how-to-deploy-a-facebook-bot-2b8c4f4e7eae#.b8kfiw1b0)
