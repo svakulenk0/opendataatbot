@@ -9,9 +9,8 @@ function create(serviceName) {
     // var url = "http://data.wu.ac.at/sparql/";
 
     return {
-        search: function (keyword) {
+        search: function (query) {
             return new Promise((resolve, reject) => {
-                console.log('Search.inputQuery:', keyword);
 
                 // create request & azure query
                 // var sparql_query = `
@@ -55,6 +54,9 @@ function create(serviceName) {
                 //                    FILTER regex(?name, "${{keyword}}", "i")
                 //                   }
                 //                 }`
+                var keyword = query.searchText;
+                console.log('Search.inputQuery:', keyword);
+
                 var url = 'http://data.wu.ac.at/sparql/?default-graph-uri=&query=select%20distinct%20%3Fd%20%3Fp%20%3Ftit%20%3Fdesc%20from%20%3Chttp%3A%2F%2Fdata.wu.ac.at%2Fportalwatch%2F1704%3E%20where%20%7B%20%7B%20%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E%20dcat%3Adataset%20%3Fd%20.%20%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E%20dct%3Atitle%20%3Fp%20.%20%3Fd%20dct%3Atitle%20%3Ftit%20.%20%3Fd%20dct%3Adescription%20%3Fdesc%20.%20FILTER%20(regex(%3Ftit%2C%20%22' + keyword + '%22%2C%20%22i%22)%20%7C%7C%20regex(%3Fdesc%2C%20%22' + keyword + '%22%2C%20%22i%22))%20%7D%20UNION%20%7B%20%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E%20dcat%3Adataset%20%3Fd%20.%20%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E%20dct%3Atitle%20%3Fp%20.%20%3Fd%20dct%3Atitle%20%3Ftit%20.%20%3Fd%20dct%3Adescription%20%3Fdesc%20.%20%3Fd%20dcat%3Adistribution%20%3Fdist%20.%20%3Fdist%20dcat%3AaccessURL%20%3Furl%20.%20%3Fcsv%20csvw%3Aurl%20%3Furl%20.%20%3Fcsv%20csvw%3AtableSchema%20%3Fschema%20.%20%3Fschema%20csvw%3Acolumn%20%3Fcol%20.%20%3Fcol%20csvw%3Aname%20%3Fname%20.%20FILTER%20regex(%3Fname%2C%20%22' + keyword + '%22%2C%20%22i%22)%20%7D%20UNION%20%7B%20%3Chttp%3A%2F%2Fdata.gv.at%3E%20dcat%3Adataset%20%3Fd%20.%20%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E%20dct%3Atitle%20%3Fp%20.%20%3Fd%20dct%3Atitle%20%3Ftit%20.%20%3Fd%20dct%3Adescription%20%3Fdesc%20.%20FILTER%20(regex(%3Ftit%2C%20%22' + keyword + '%22%2C%20%22i%22)%20%7C%7C%20regex(%3Fdesc%2C%20%22' + keyword + '%22%2C%20%22i%22))%20%7D%20UNION%20%7B%20%3Chttp%3A%2F%2Fdata.gv.at%3E%20dcat%3Adataset%20%3Fd%20.%20%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E%20dct%3Atitle%20%3Fp%20.%20%3Fd%20dct%3Atitle%20%3Ftit%20.%20%3Fd%20dct%3Adescription%20%3Fdesc%20.%20%3Fd%20dcat%3Adistribution%20%3Fdist%20.%20%3Fdist%20dcat%3AaccessURL%20%3Furl%20.%20%3Fcsv%20csvw%3Aurl%20%3Furl%20.%20%3Fcsv%20csvw%3AtableSchema%20%3Fschema%20.%20%3Fschema%20csvw%3Acolumn%20%3Fcol%20.%20%3Fcol%20csvw%3Aname%20%3Fname%20.%20FILTER%20regex(%3Fname%2C%20%22' + keyword + '%22%2C%20%22i%22)%20%7D%20%7D%20'
                 // create request query
                 var options = {
@@ -78,7 +80,7 @@ function create(serviceName) {
                     if (err) {
                         return reject(err);
                     }
-                    console.log('Search.Output:', azureResponse.results.bindings);
+                    // console.log('Search.Output:', azureResponse.results.bindings);
 
                     resolve({
                         results: azureResponse.results,
