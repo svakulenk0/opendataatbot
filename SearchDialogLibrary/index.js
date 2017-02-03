@@ -84,12 +84,12 @@ function create(settings) {
         new builder.IntentDialog()
             .onBegin((session, args) => {
                 // Save previous state
-                // session.dialogData.selection = args.selection;
+                selection = args.selection;
                 session.dialogData.searchResponse = args.searchResponse;
-                // session.dialogData.query = args.query;
+                query = args.query;
 
                 // Display results
-                var results = args.searchResponse.facets.bindings;
+                var results = args.searchResponse;
                 console.log('Search.Output:', results.length);
                 var number_results = results.length.toString();
                 // var reply_text = 'There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.'
@@ -103,8 +103,15 @@ function create(settings) {
 
                 session.send(reply);
 
-                // Restart
-                session.replaceDialog('/');
+                // Restart dialog thread
+                // session.dialogData.firstTimeDone = true;
+                // session.beginDialog('/');
+                // session.beginDialog('confirm-continue', { });
+                session.replaceDialog('confirm-continue', {
+                    message: 'Would you like to search again?',
+                    selection: selection,
+                    query: query
+                });
 
                 // session.send('Do you want to search *again* or *done*?');
 
@@ -209,7 +216,7 @@ function create(settings) {
         if (args.response === undefined) {
             session.dialogData.selection = args.selection;
             session.dialogData.query = args.query;
-            builder.Prompts.confirm(session, args.message || 'Do you want to continue searching and adding more items?');
+            builder.Prompts.confirm(session, args.message || 'Do you want to continue searching?');
         } else {
             return session.endDialogWithResult({
                 done: !args.response,
@@ -220,9 +227,15 @@ function create(settings) {
     }));
 
     function performSearch(session, query, selection) {
+
+        var reply = new builder.Message(session)
+                    .text('Let me have a look ...');
+        session.send(reply);
+
         settings.search(query).then((response) => {
             // console.log('Search.Output:', response);
-            if (response.length === 0) {
+            var results = response.facets.bindings;
+            if (results.length === 0) {
                 // No Results - Prompt retry
                 session.beginDialog('confirm-continue', {
                     message: 'Sorry, I didn\'t find any matches. Do you want to retry your search?',
@@ -232,7 +245,7 @@ function create(settings) {
             } else {
                 // Handle results selection
                 session.beginDialog('results', {
-                    searchResponse: response,
+                    searchResponse: results,
                     selection: selection,
                     query: query
                 });
@@ -275,14 +288,13 @@ function create(settings) {
     }
 
     function searchPrompt(session) {
-        var prompt = 'What would you like to search for?';
+        var prompt = 'Hello! What would you like to search for?';
         if (session.dialogData.firstTimeDone) {
             prompt = 'What else would you like to search for?';
-            if (settings.multipleSelection) {
-                prompt += ' You can also *list* all items you\'ve added so far.';
-            }
+            // if (settings.multipleSelection) {
+            //     prompt += ' You can also *list* all items you\'ve added so far.';
+            // }
         }
-
         session.dialogData.firstTimeDone = true;
         builder.Prompts.text(session, prompt);
     }
