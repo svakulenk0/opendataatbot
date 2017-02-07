@@ -16,3 +16,5 @@ Kickstarted at the Data Pioneers Create Camp @ZAMG Vienna 2 February 2017.
 * [BotBuilder Samples](https://github.com/Microsoft/BotBuilder-Samples/tree/master/Node/demo-Search)
 
 * [How to deploy a Facebook bot](https://medium.com/@igougi.ui/how-to-deploy-a-facebook-bot-2b8c4f4e7eae#.b8kfiw1b0)
+
+* Inspired by [OpenDataUaBot](https://opendatabot.com/en)
