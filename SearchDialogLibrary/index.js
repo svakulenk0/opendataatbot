@@ -91,15 +91,15 @@ function create(settings) {
                 // Display results
                 var results = args.searchResponse;
                 console.log('Search.Output:', results.length);
+                console.log('Search.Output:', results);
                 var number_results = results.length.toString();
                 // var reply_text = 'There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.'
                 // builder.Prompts.text(session, reply_text);
                 var reply = new builder.Message(session)
                     // .text('Here are a few good options I found' + number_results);
-                    .text('There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.');
-                    
-                    // .attachmentLayout(builder.AttachmentLayout.carousel)
-                    // .attachments(results.map(searchHitAsCard.bind(null, true)));
+                    .text('There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.')
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments(results.map(searchHitAsCard.bind(null, true)));
 
                 session.send(reply);
 
@@ -255,20 +255,27 @@ function create(settings) {
 
     function searchHitAsCard(showSave, searchHit) {
         var buttons = showSave
-            ? [new builder.CardAction().type('imBack').title('Save').value(searchHit.key)]
+            ? [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d.value)]
             : [];
+        // dataset url
+        // var buttons = new builder.CardAction().type('openUrl').title('Show').value(searchHit.d.value);
 
         var card = new builder.HeroCard()
-            .title(searchHit.title)
+            .title(searchHit.tit.value)
             .buttons(buttons);
 
-        if (searchHit.description) {
-            card.subtitle(searchHit.description);
+        if (searchHit.desc) {
+            // portal url
+            card.subtitle(searchHit.p.value);
+            // dataset url
+            // searchHit.d.value
+            // description
+            card.text(searchHit.desc.value.substr(0, 200));
         }
-
-        if (searchHit.imageUrl) {
-            card.images([new builder.CardImage().url(searchHit.imageUrl)]);
-        }
+        // no images for results
+        // if (searchHit.imageUrl) {
+        //     card.images([new builder.CardImage().url(searchHit.imageUrl)]);
+        // }
 
         return card;
     }
