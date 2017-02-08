@@ -90,14 +90,14 @@ function create(settings) {
 
                 // Display results
                 var results = args.searchResponse;
-                console.log('Search.Output:', results.length);
-                console.log('Search.Output:', results);
-                var number_results = results.length.toString();
+                // console.log('Search.Output:', results.length);
+                // console.log('Search.Output:', results);
+                // var number_results = results.length.toString();
                 // var reply_text = 'There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.'
                 // builder.Prompts.text(session, reply_text);
                 var reply = new builder.Message(session)
                     // .text('Here are a few good options I found' + number_results);
-                    .text('There are ' + number_results + ' datasets in the austrian open data portals that may be of interest to you.')
+                    .text('There are ' + args.total + ' datasets in the austrian open data portals that may be of interest to you.')
                     .attachmentLayout(builder.AttachmentLayout.carousel)
                     .attachments(results.map(searchHitAsCard.bind(null, true)));
 
@@ -233,8 +233,8 @@ function create(settings) {
         session.send(reply);
 
         settings.search(query).then((response) => {
-            // console.log('Search.Output:', response);
-            var results = response.facets.bindings;
+            console.log('Search.Output:', response);
+            var results = response.facets;
             if (results.length === 0) {
                 // No Results - Prompt retry
                 session.beginDialog('confirm-continue', {
@@ -246,6 +246,7 @@ function create(settings) {
                 // Handle results selection
                 session.beginDialog('results', {
                     searchResponse: results,
+                    total: response.total,
                     selection: selection,
                     query: query
                 });
@@ -255,22 +256,22 @@ function create(settings) {
 
     function searchHitAsCard(showSave, searchHit) {
         var buttons = showSave
-            ? [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d.value)]
+            ? [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d)]
             : [];
         // dataset url
         // var buttons = new builder.CardAction().type('openUrl').title('Show').value(searchHit.d.value);
 
         var card = new builder.HeroCard()
-            .title(searchHit.tit.value)
+            .title(searchHit.tit)
             .buttons(buttons);
 
         if (searchHit.desc) {
             // portal url
-            card.subtitle(searchHit.p.value);
+            card.subtitle(searchHit.p);
             // dataset url
             // searchHit.d.value
             // description
-            card.text(searchHit.desc.value.substr(0, 200));
+            card.text(searchHit.desc.substr(0, 200));
         }
         // no images for results
         // if (searchHit.imageUrl) {
@@ -340,8 +341,9 @@ function refine(session, args) {
 function defaultResultsMapper(itemMap) {
     return function (providerResults) {
         return {
-            results: providerResults.results,
-            facets: providerResults.results
+            // results: providerResults.results,
+            facets: providerResults.results,
+            total: providerResults.total
         };
     };
 }
