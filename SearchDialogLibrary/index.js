@@ -105,13 +105,13 @@ function create(settings) {
 
                 // Restart dialog thread
                 // session.dialogData.firstTimeDone = true;
-                // session.beginDialog('/');
+                session.beginDialog('/');
                 // session.beginDialog('confirm-continue', { });
-                session.replaceDialog('confirm-continue', {
-                    message: 'Would you like to search again?',
-                    selection: selection,
-                    query: query
-                });
+                // session.replaceDialog('confirm-continue', {
+                //     message: 'Would you like to search again?',
+                //     selection: selection,
+                //     query: query
+                // });
 
                 // session.send('Do you want to search *again* or *done*?');
 
@@ -295,7 +295,8 @@ function create(settings) {
     }
 
     function searchPrompt(session) {
-        var prompt = 'Hello! What would you like to search for?';
+        // var prompt = 'Hello! What would you like to search for? For example, "wien ticket"';
+        var prompt = 'What would you like to search for?';
         if (session.dialogData.firstTimeDone) {
             prompt = 'What else would you like to search for?';
             // if (settings.multipleSelection) {
