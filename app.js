@@ -31,7 +31,7 @@ server.post('/api/messages', connector.listen());
 
 // Azure Search
 var azureSearchClient = AzureSearch.create('opendataatportals');
-var realStateResultsMapper = SearchLibrary.defaultResultsMapper(realstateToSearchHit);
+var realStateResultsMapper = SearchLibrary.defaultResultsMapper();
 
 
 // Register Search Dialogs Library with bot
@@ -41,15 +41,15 @@ bot.library(SearchLibrary.create({
 }));
 
 // Maps the AzureSearch RealState Document into a SearchHit that the Search Library can use
-function realstateToSearchHit(realstate) {
-    return {
-        key: realstate.listingId,
-        title: util.format('%d bedroom, %d bath in %s, $%s',
-            realstate.beds, realstate.baths, realstate.city, realstate.price.toFixed(2)),
-        description: realstate.description,
-        imageUrl: realstate.thumbnail
-    };
-}
+// function realstateToSearchHit(realstate) {
+//     return {
+//         key: realstate.listingId,
+//         title: util.format('%d bedroom, %d bath in %s, $%s',
+//             realstate.beds, realstate.baths, realstate.city, realstate.price.toFixed(2)),
+//         description: realstate.description,
+//         imageUrl: realstate.thumbnail
+//     };
+// }
 
 //=========================================================
 // Bots Dialogs
