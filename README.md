@@ -1,10 +1,11 @@
-# OpenDataAT Assistant
+# Open Data AT Assistant
 NodeJS chatbot as a search interface to the austrian open data portals: [data.gv.at](data.gv.at) and [opendataportal.at](opendataportal.at)
 <!-- We developed a small chatbot in NodeJS to provide a search interface to the austrian open data.  -->
 
 
 The project was kickstarted at the Data Pioneers Create Camp @ZAMG Vienna on 2 February 2017.
 
+[FAQ slides](http://www.slideshare.net/svakulenko/open-data-at-chatbot-faq)
 
 ## Requirements
 
@@ -16,7 +17,7 @@ The project was kickstarted at the Data Pioneers Create Camp @ZAMG Vienna on 2 F
 * Performance
 
 ** host on a local server instead of Heroku
-** bind direclty to Facebook instead of Microsoft Platform gateway
+** hook direclty to Facebook instead of the Microsoft hub
 
 * UI
 
