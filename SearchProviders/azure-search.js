@@ -54,6 +54,8 @@ function create(serviceName) {
                 //                    FILTER regex(?name, "${{keyword}}", "i")
                 //                   }
                 //                 }`
+
+                // encode utf-8 e.g. german umlaut
                 var keyword = unescape(encodeURIComponent(query.searchText));
                 console.log('Search.inputQuery:', keyword);
 

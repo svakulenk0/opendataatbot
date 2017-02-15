@@ -53,7 +53,9 @@ function create(settings) {
             var input = args.response;
             var hasInput = typeof input === 'string';
             if (hasInput) {
-                if (input.trim().toLowerCase() === 'bye') {
+                var command = input.trim().toLowerCase();
+                var good_byes = ['bye', 'tschüss', 'ciao']
+                if (good_byes.indexOf(command) >= 0) {
                     // Say bye and shut up!
                     var reply = new builder.Message(session)
                         .text('Cool, just let me know when you need my help. Have a nice day! ');
@@ -74,6 +76,8 @@ function create(settings) {
     library.dialog('results',
         new builder.IntentDialog()
             .onBegin((session, args) => {
+                // console.log('args:', args);
+
                 // Save previous state
                 selection = args.selection;
                 session.dialogData.searchResponse = args.searchResponse;
@@ -97,15 +101,16 @@ function create(settings) {
                 // Restart dialog thread
                 // session.dialogData.firstTimeDone = true;
                 session.replaceDialog('/');
-                // session.beginDialog('confirm-continue', { });
                 // session.replaceDialog('confirm-continue', {
                 //     message: 'Would you like to search again?',
                 //     selection: selection,
                 //     query: query
                 // });
-
                 // session.send('Do you want to search *again* or *done*?');
-
+                })
+                // fix to recover from the intent null error
+                .onDefault((session, args) => {
+                    session.replaceDialog('/');
             }));
 
     function performSearch(session, query, selection) {
