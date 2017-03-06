@@ -58,7 +58,7 @@ function create(settings) {
                 if (good_byes.indexOf(command) >= 0) {
                     // Say bye and shut up!
                     var reply = new builder.Message(session)
-                        .text('Cool, just let me know when you need my help. Have a nice day! ');
+                        .text('OK, sag Bescheid wenn du noch etwas brauchst!');
                     session.send(reply);
                     // session.beginDialog('/');
                 } else {
@@ -92,7 +92,7 @@ function create(settings) {
                 // builder.Prompts.text(session, reply_text);
                 var reply = new builder.Message(session)
                     // .text('Here are a few good options I found' + number_results);
-                    .text('There are ' + args.total + ' datasets in the austrian open data portals that may be of interest to you.')
+                    .text('Dazu gibt es ' + args.total + ' Datensätze in den österreichischen Open Data Portalen.')
                     .attachmentLayout(builder.AttachmentLayout.carousel)
                     .attachments(results.map(searchHitAsCard.bind(null, true)));
 
@@ -116,7 +116,7 @@ function create(settings) {
     function performSearch(session, query, selection) {
 
         var reply = new builder.Message(session)
-                    .text('Let me have a look ...');
+                    .text('Einen Moment bitte ...');
         session.send(reply);
 
         settings.search(query).then((response) => {
@@ -125,7 +125,7 @@ function create(settings) {
             if (results.length === 0) {
                 // Report No Results and continue
                 var reply = new builder.Message(session)
-                    .text('Sorry, I didn\'t find any matches.');
+                    .text('Tut mir leid, dazu habe ich nichts gefunden :(');
                 session.send(reply);
                 session.beginDialog('/');
 
@@ -179,7 +179,7 @@ function create(settings) {
     function searchPrompt(session) {
         // var prompt = 'Hello! What would you like to search for? For example, "wien ticket"';
         // give keyword to search
-        var prompt = 'What would you like to search for?';
+        var prompt = 'Wonach möchtest du suchen?';
         // if (session.dialogData.firstTimeDone) {
         //     prompt = 'What else would you like to search for?';
         //     // if (settings.multipleSelection) {
