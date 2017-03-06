@@ -58,7 +58,7 @@ function create(settings) {
                 if (good_byes.indexOf(command) >= 0) {
                     // Say bye and shut up!
                     var reply = new builder.Message(session)
-                        .text('OK, sag Bescheid wenn du noch etwas brauchst!');
+                        .text('Bis bald! Sag Bescheid wenn du wieder etwas brauchst.');
                     session.send(reply);
                     // session.beginDialog('/');
                 } else {
