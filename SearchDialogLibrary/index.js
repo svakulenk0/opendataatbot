@@ -174,7 +174,7 @@ function create(settings) {
         //     card.images([new builder.CardImage().url(searchHit.imageUrl)]);
         // }
 
-        // card.tap(builder.CardAction.openUrl(session, searchHit.d))
+        card.tap(builder.CardAction.openUrl(session, searchHit.d))
 
         return card;
     }
