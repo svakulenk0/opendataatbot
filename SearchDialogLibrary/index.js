@@ -148,11 +148,12 @@ function create(settings) {
     }
 
     function searchHitAsCard(showSave, searchHit) {
-        var buttons = showSave
-            ? [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d)]
-            : [];
+        // var buttons = showSave
+        //     ? [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d)]
+        //     : [];
+
         // dataset url
-        // var buttons = new builder.CardAction().type('openUrl').title('Show').value(searchHit.d.value);
+        var buttons = [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d)];
 
         var card = new builder.HeroCard()
             .title(searchHit.tit)
@@ -170,6 +171,8 @@ function create(settings) {
         // if (searchHit.imageUrl) {
         //     card.images([new builder.CardImage().url(searchHit.imageUrl)]);
         // }
+
+        card.tap(builder.CardAction.openUrl(null, searchHit.d))
 
         return card;
     }

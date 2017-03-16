@@ -19,9 +19,8 @@ The project was kickstarted at the Data Pioneers Create Camp @ZAMG Vienna on 2 F
 ** host on a local server instead of Heroku
 ** hook direclty to Facebook instead of the Microsoft hub
 
-* UI
+<!-- * UI -->
 
-** eliminate retry dialog?
 
 * results (short summary). For each of the datasets:
 
