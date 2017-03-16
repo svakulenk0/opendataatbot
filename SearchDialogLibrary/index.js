@@ -161,9 +161,9 @@ function create(settings) {
 
         if (searchHit.desc) {
             // portal url
-            card.subtitle(searchHit.p);
+            // card.subtitle(searchHit.p);
             // dataset url
-            // card.subtitle(searchHit.d);
+            card.subtitle(searchHit.d);
             // card.subtitle(builder.CardAction().type('openUrl').title('Show').value(searchHit.d));
             // searchHit.d.value
             // description
@@ -174,7 +174,7 @@ function create(settings) {
         //     card.images([new builder.CardImage().url(searchHit.imageUrl)]);
         // }
 
-        card.tap(new builder.CardAction().type('openUrl').title('Show').value(searchHit.d))
+        card.tap()
 
         return card;
     }
