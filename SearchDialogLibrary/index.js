@@ -94,7 +94,7 @@ function create(settings) {
                     // .text('Here are a few good options I found' + number_results);
                     .text('Dazu gibt es ' + args.total + ' Datensätze in den österreichischen Open Data Portalen.')
                     .attachmentLayout(builder.AttachmentLayout.carousel)
-                    .attachments(results.map(searchHitAsCard.bind(null, true)));
+                    .attachments(results.map(searchHitAsCard.bind(null, session)));
 
                 session.send(reply);
 
@@ -147,23 +147,25 @@ function create(settings) {
         });
     }
 
-    function searchHitAsCard(showSave, searchHit) {
+    function searchHitAsCard(session, searchHit) {
         // var buttons = showSave
         //     ? [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d)]
         //     : [];
 
         // dataset url
+        // button click does not work in Skype
         var buttons = [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d)];
 
         var card = new builder.HeroCard()
-            .title(searchHit.tit)
-            .buttons(buttons);
+            .title(searchHit.tit);
+            // .buttons(buttons);
 
         if (searchHit.desc) {
             // portal url
-            // card.subtitle(searchHit.p);
+            card.subtitle(searchHit.p);
             // dataset url
-            card.subtitle(searchHit.d);
+            // link for Skype client
+            // card.subtitle(searchHit.d);
             // card.subtitle(builder.CardAction().type('openUrl').title('Show').value(searchHit.d));
             // searchHit.d.value
             // description
@@ -174,7 +176,7 @@ function create(settings) {
         //     card.images([new builder.CardImage().url(searchHit.imageUrl)]);
         // }
 
-        card.tap()
+        card.tap(builder.CardAction.openUrl(session, searchHit.d))
 
         return card;
     }
