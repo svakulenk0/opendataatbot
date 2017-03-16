@@ -157,26 +157,24 @@ function create(settings) {
         var buttons = [new builder.CardAction().type('openUrl').title('Show').value(searchHit.d)];
 
         var card = new builder.HeroCard()
-            .title(searchHit.tit);
-            // .buttons(buttons);
+            .title(searchHit.tit)
+            .buttons(buttons);
 
         if (searchHit.desc) {
             // portal url
-            card.subtitle(searchHit.p);
+            // card.subtitle(searchHit.p);
+            // description
+            card.subtitle(searchHit.desc.substr(0, 200));
             // dataset url
             // link for Skype client
-            // card.subtitle(searchHit.d);
-            // card.subtitle(builder.CardAction().type('openUrl').title('Show').value(searchHit.d));
-            // searchHit.d.value
-            // description
-            card.text(searchHit.desc.substr(0, 200));
+            card.text(searchHit.d);
         }
         // no images for results
         // if (searchHit.imageUrl) {
         //     card.images([new builder.CardImage().url(searchHit.imageUrl)]);
         // }
 
-        card.tap(builder.CardAction.openUrl(session, searchHit.d))
+        // card.tap(builder.CardAction.openUrl(session, searchHit.d))
 
         return card;
     }
