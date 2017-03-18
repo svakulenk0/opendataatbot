@@ -92,7 +92,7 @@ function create(settings) {
                 // builder.Prompts.text(session, reply_text);
                 var reply = new builder.Message(session)
                     // .text('Here are a few good options I found' + number_results);
-                    .text('Dazu gibt es ' + args.total + ' Datensätze in den österreichischen Open Data Portalen.')
+                    // .text('Dazu gibt es ' + args.total + ' Datensätze in den österreichischen Open Data Portalen.')
                     .attachmentLayout(builder.AttachmentLayout.carousel)
                     .attachments(results.map(searchHitAsCard.bind(null, session)));
 
