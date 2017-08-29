@@ -36,6 +36,7 @@ where {
     <https://www.opendataportal.at/> dcat:dataset ?d .
 }
 
+var url = 'http://data.wu.ac.at/sparql/?default-graph-uri=&query=select+%28count%28distinct+%3Fd%29+AS+%3Fcount%29%0D%0Awhere+%7B%0D%0A++++%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E+dcat%3Adataset+%3Fd+.%0D%0A%7D'
 
 
 ## Future Work
@@ -75,3 +76,5 @@ where {
 * [How to deploy a Facebook bot](https://medium.com/@igougi.ui/how-to-deploy-a-facebook-bot-2b8c4f4e7eae#.b8kfiw1b0)
 
 * Inspired by [OpenDataUaBot](https://opendatabot.com/en)
+
+* [URL Encoder](http://www.url-encode-decode.com)
