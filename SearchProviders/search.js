@@ -3,6 +3,27 @@ var _ = require('lodash');
 var Promise = require('bluebird');
 var request = require('request');
 
+function count() {
+    var url = 'http://portalwatch.ai.wu.ac.at/csvsearch/es/portals/_count?q=catalog.url:%22http://data.gv.at/%22'
+    var count = None
+    // create request query
+    var options = {
+        url: url,
+        headers: { },
+        withCredentials: false,
+        json: true
+    };
+    request.get(options, (err, httpResponse, response) => {
+        if (err) {
+            return reject(err);
+        }
+        console.log('Count:', response.count);
+        resolve({
+            count: response.count,
+        });
+    });
+}
+
 function create(serviceName) {
     // base url
     // e.g.: https://realestate.search.windows.net/indexes('listings')/docs/search.post.search?api-version=2015-02-28-Preview 

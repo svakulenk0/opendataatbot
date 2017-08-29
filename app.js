@@ -12,7 +12,7 @@ server.listen(process.env.port || process.env.PORT || 8080, function () {
 });
   
 var SearchLibrary = require('./SearchDialogLibrary');
-var AzureSearch = require('./SearchProviders/azure-search');
+var Search = require('./SearchProviders/search');
 
 // Create chat bot
 var connector = new builder.ChatConnector({
@@ -30,7 +30,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
 server.post('/api/messages', connector.listen());
 
 // Azure Search
-var azureSearchClient = AzureSearch.create('opendataatportals');
+var azureSearchClient = Search.create('opendataatportals');
 var realStateResultsMapper = SearchLibrary.defaultResultsMapper();
 
 
