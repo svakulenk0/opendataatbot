@@ -11,6 +11,11 @@ The project was kickstarted at the Data Pioneers Create Camp @ZAMG Vienna on 2 F
 
 * node
 
+## Deploy
+
+node app.js
+
+
 ## API Reference
 
 [Portal Watch SPARQL API](http://data.wu.ac.at/portalwatch/sparql)
@@ -36,7 +41,19 @@ where {
     <https://www.opendataportal.at/> dcat:dataset ?d .
 }
 
-var url = 'http://data.wu.ac.at/sparql/?default-graph-uri=&query=select+%28count%28distinct+%3Fd%29+AS+%3Fcount%29%0D%0Awhere+%7B%0D%0A++++%3Chttps%3A%2F%2Fwww.opendataportal.at%2F%3E+dcat%3Adataset+%3Fd+.%0D%0A%7D'
+var url = 'http://data.wu.ac.at/sparql/?default-graph-uri=&query=select+%28count%28distinct+%3Fd%29+AS+%3Fcount%29%0D%0Awhere+%7B%0D%0A++++%3Chttp%3A%2F%2Fdata.gv.at%2F%3E+dcat%3Adataset+%3Fd+.%0D%0A%7D'
+
+
+[Portal Watch Portal API](http://data.wu.ac.at/portalwatch/api/v1/portal/)
+
+* Listing queries
+** get the list of all portal datasets 
+
+http://data.wu.ac.at/portalwatch/api/v1/portal/www_opendataportal_at/1643/datasets
+
+** get the list of all available snapshots (yyww)
+
+http://data.wu.ac.at/portalwatch/api/v1/portal/www_opendataportal_at/snapshots
 
 
 ## Future Work
