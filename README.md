@@ -11,6 +11,32 @@ The project was kickstarted at the Data Pioneers Create Camp @ZAMG Vienna on 2 F
 
 * node
 
+## API Reference
+
+[Portal Watch SPARQL API](http://data.wu.ac.at/portalwatch/sparql)
+
+* Listing queries
+** get dataset descriptions
+
+select distinct ?d ?p ?tit ?desc from <http://data.wu.ac.at/portalwatch/1704>
+where {
+        {
+            <https://www.opendataportal.at/> dcat:dataset ?d .
+            <https://www.opendataportal.at/> dct:title ?p .
+            ?d dct:title ?tit .
+            ?d dct:description ?desc .
+      }
+    }
+
+* Aggregation queries
+** count all datasets available in the portal
+
+select (count(distinct ?d) AS ?count)
+where {
+    <https://www.opendataportal.at/> dcat:dataset ?d .
+}
+
+
 
 ## Future Work
 
